@@ -209,7 +209,7 @@ const Landing = (prop) => {
   };
   return (
     <div className="landing h-[100vh] flex flex-col items-center justify-center text-center px-4 z-[1] relative">
-      <div className="flex flex-col justify-between h-full pt-[350px] pb-10">
+      <div className="flex flex-col justify-between h-full pt-[200px] md:pt-[350px] pb-10">
         <div className="relative flex flex-col gap-6 items-center">
           <h1 className="secular lg:text-[5vw]">HEY, I'M LEONELL CRUZ</h1>
           <p className="text-medium max-w-[500px]">
