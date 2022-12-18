@@ -33,11 +33,12 @@ function App() {
   const refContact = useRef();
 
   const inViewport = useIntersection(refHome);
-
-  useEffect(() => {
-    console.log('test', inViewport);
-  }, [inViewport]);
-
+  const checkClick = (e) => {
+    if (!e.target.className.includes('mobile-nav')) {
+      setAnimate('closed')
+    }
+  }
+  document.addEventListener('click', checkClick)
 
   return (
     <div className="App max-w-[100vw] min-h-[100vh]">
@@ -50,9 +51,9 @@ function App() {
         </div>
 
         <div className="md:hidden">
-          <Menu onClick={handleOpenNavbar} />
+          <Menu onClick={handleOpenNavbar} className='cursor-pointer' />
           <motion.ul
-            className="fixed right-0 bg-yellow top-0 w-[40%] h-[100vh] p-10 flex flex-col gap-4"
+            className="mobile-nav fixed right-0 bg-yellow top-0 w-[40%] h-[100vh] p-10 flex flex-col gap-4"
             initial={{ x: '280px', opacity: 1 }}
             animate={animate}
             variants={animateVariant}
@@ -86,7 +87,7 @@ function App() {
             >
               Contact
             </li>
-            <X className="absolute right-[20px] top-[20px]" onClick={handleCloseNavbar} />
+            <X className="absolute right-[20px] top-[20px] cursor-pointer" onClick={handleCloseNavbar} />
           </motion.ul>
         </div>
         <ul className="hidden md:flex gap-8">
@@ -265,7 +266,7 @@ const About = () => {
             <h4 className="mb-3 font-[500] text-darkGrey">Frontend</h4>
             <div className="flex flex-wrap gap-2">
               {frontend.map((item, index) => {
-                return <Skills item={item} />;
+                return <Skills key={index} item={item} />;
               })}
             </div>
           </div>
@@ -273,7 +274,7 @@ const About = () => {
             <h4 className="mb-3 font-[500] text-darkGrey">Backend</h4>
             <div className="flex flex-wrap gap-2">
               {backend.map((item, index) => {
-                return <Skills item={item} />;
+                return <Skills key={index} item={item} />;
               })}
             </div>
           </div>
@@ -281,7 +282,7 @@ const About = () => {
             <h4 className="mb-3 font-[500] text-darkGrey">Other Tools</h4>
             <div className="flex flex-wrap gap-2">
               {others.map((item, index) => {
-                return <Skills item={item} />;
+                return <Skills key={index} item={item} />;
               })}
             </div>
           </div>
