@@ -120,45 +120,47 @@ function App() {
           </li>
         </ul>
       </Navbar>
-      <div ref={refHome}>
-        <Landing />
-      </div>
-      <div ref={refAbout}>
-        <About />
-      </div>
-      <div ref={refProjects}>
-        <Projects />
-      </div>
-      <div ref={refContact}>
-        <Contact />
-      </div>
-      <Footer />
-      <motion.div
-        className="hidden md:block fixed top-[30%] bg-[black] min-w-[50px] min-h-[60px] shadow-contact p-4 z-[9999999] opacity-[.6] rounded-r-[5px]"
-        initial={{ opacity: 0, x: '-10px' }}
-        animate={{ opacity: 0.6, x: 0 }}
-        transition={{ type: 'spring', duration: 1.5, bounce: 0 }}
-      >
-        <div className="flex flex-col items-center gap-6">
-          <Linkedin color="#fff" className="socials-icon" onClick={() => window.open('https://www.linkedin.com/in/leonellcruz/')} />
-          <Twitter color="#fff" className="socials-icon" onClick={() => window.open('')} />
-          <Youtube color="#fff" className="socials-icon" onClick={() => window.open('https://www.youtube.com/@leonellcruz6948')} />
-          <Github color="#fff" className="socials-icon" onClick={() => window.open('https://github.com/leonellcruz7')} />
-          <Facebook color="#fff" className="socials-icon" onClick={() => window.open('https://www.facebook.com/leonell.b.cruz')} />
+      <div className={animate === 'open' ? 'transition delay-150 blur-sm' : ''}>
+        <div ref={refHome}>
+          <Landing />
         </div>
-      </motion.div>
-      {!inViewport ? <motion.div
-        className="fixed cursor-pointer bottom-[20px] right-[20px] bg-yellow p-3 rounded-[5px] shadow-contact z-[99999] onHover"
-        initial={{ opacity: 0, y: '30px' }}
-        animate={{ opacity: .85, y: 0 }}
-        transition={{ type: 'spring', duration: .3, bounce: 0 }}
-        whileHover={{ y: -10 }}
-        onClick={() => {
-          refHome.current?.scrollIntoView({ behavior: 'smooth' });
-        }}
-      >
-        <ChevronUp color="#fff" />
-      </motion.div> : <></>}
+        <div ref={refAbout}>
+          <About />
+        </div>
+        <div ref={refProjects}>
+          <Projects />
+        </div>
+        <div ref={refContact}>
+          <Contact />
+        </div>
+        <Footer />
+        <motion.div
+          className="hidden md:block fixed top-[30%] bg-[black] min-w-[50px] min-h-[60px] shadow-contact p-4 z-[9999999] opacity-[.6] rounded-r-[5px]"
+          initial={{ opacity: 0, x: '-10px' }}
+          animate={{ opacity: 0.6, x: 0 }}
+          transition={{ type: 'spring', duration: 1.5, bounce: 0 }}
+        >
+          <div className="flex flex-col items-center gap-6">
+            <Linkedin color="#fff" className="socials-icon" onClick={() => window.open('https://www.linkedin.com/in/leonellcruz/')} />
+            <Twitter color="#fff" className="socials-icon" onClick={() => window.open('')} />
+            <Youtube color="#fff" className="socials-icon" onClick={() => window.open('https://www.youtube.com/@leonellcruz6948')} />
+            <Github color="#fff" className="socials-icon" onClick={() => window.open('https://github.com/leonellcruz7')} />
+            <Facebook color="#fff" className="socials-icon" onClick={() => window.open('https://www.facebook.com/leonell.b.cruz')} />
+          </div>
+        </motion.div>
+        {!inViewport ? <motion.div
+          className="fixed cursor-pointer bottom-[20px] right-[20px] bg-yellow p-3 rounded-[5px] shadow-contact z-[99999] onHover"
+          initial={{ opacity: 0, y: '30px' }}
+          animate={{ opacity: .85, y: 0 }}
+          transition={{ type: 'spring', duration: .3, bounce: 0 }}
+          whileHover={{ y: -10 }}
+          onClick={() => {
+            refHome.current?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          <ChevronUp color="#fff" />
+        </motion.div> : <></>}
+      </div>
 
     </div>
   );
@@ -166,23 +168,7 @@ function App() {
 
 export default App;
 const Navbar = (prop) => {
-  const [animate, setAnimate] = useState('closed');
-  const animateVariant = {
-    closed: {
-      right: '-100%',
-      opacity: 1,
-    },
-    open: {
-      x: '0',
-      opacity: 1,
-    },
-  };
-  const handleOpenNavbar = () => {
-    setAnimate('open');
-  };
-  const handleCloseNavbar = () => {
-    setAnimate('closed');
-  };
+
   return <div className="navbar fixed h-[60px] bg-white flex items-center justify-between px-4 z-[999999] sm:px-10 w-full">{prop.children}</div>;
 };
 
